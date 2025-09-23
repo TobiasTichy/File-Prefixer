@@ -15,16 +15,16 @@ def prefix_files_in_folder(folder_path):
             os.rename(file_path, new_path)
             print(f"Renamed: {filename} → {new_name}")
             
-#loop through the folder
+#loop through current folder
 def rename_the_files(dir_path, file_list):
     for file in file_list:
         current_file_path = os.path.join(dir_path, file)
         
         if os.path.isdir(current_file_path) and os.path.basename(current_file_path) != "folder_scripts":
-            rename_the_files(current_file_path, os.listdir(current_file_path))
+            rename_the_files(current_file_path, os.listdir(current_file_path)) #recursively loop through all the folders in the current folder
             prefix_files_in_folder(current_file_path)
         
-        
+
 main_dir = r"C:\Users\tobyt\OneDrive\ETH OneDrive_Personal\Master"
 file_list = os.listdir(main_dir)
 
