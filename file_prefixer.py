@@ -31,7 +31,7 @@ def rename_the_files(dir_path, file_list):
             prefix_files_in_folder(current_file_path)
         
 
-main_dir = r"C:\Users\tobyt\OneDrive\ETH OneDrive_Personal\test"# your main directory
+main_dir = r""# type your main directory in the quotes
 main_strip = main_dir.rstrip("/\\").split(os.sep)
 file_list = os.listdir(main_dir)
 
