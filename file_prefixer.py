@@ -15,21 +15,27 @@ def prefix_files_in_folder(folder_path):
         if filename.startswith(folder_name + "_") or filename.startswith("IGN_"): #ignore tag IGN_
             continue
         #rename files
-        else:
-            new_name = f"{folder_name}_{filename}"
-            new_path = os.path.join(folder_path, new_name)
+        new_name = f"{folder_name}_{filename}" 
+        new_path = os.path.join(folder_path, new_name)
+        if not os.path.exists(new_path):
             os.rename(file_path, new_path)
             print(f"Renamed: {filename} → {new_name}")
+        else:
+            print("duplicate file names detected")
             
 #loop through current folder
 def rename_the_files(dir_path, file_list):
     for file in file_list:
         current_file_path = os.path.join(dir_path, file)
         
+        if file.startswith("IGN_"):
+            continue
+        
         if os.path.isdir(current_file_path):
             rename_the_files(current_file_path, os.listdir(current_file_path)) #recursively loop through all the folders in the current folder
             prefix_files_in_folder(current_file_path)
         
+
 
 main_dir = r""# type your main directory in the quotes
 main_strip = main_dir.rstrip("/\\").split(os.sep)
