@@ -1,8 +1,14 @@
 import os
 
+#gets the prefix
+def get_prefix(directory_path):
+    dir_strip = directory_path.rstrip("/\\").split(os.sep)
+    dir_strip = [x for x in dir_strip if x not in main_strip]
+    return dir_strip[0]
+
 #add prefix to all files
 def prefix_files_in_folder(folder_path):
-    folder_name = folder_path.rstrip("/\\").split(os.sep)[folder_path.rstrip("/\\").split(os.sep).index("Master") + 1]
+    folder_name = str(get_prefix(folder_path))
     for filename in os.listdir(folder_path):
         file_path = os.path.join(folder_path, filename)
         # Skip if already prefixed
@@ -20,12 +26,13 @@ def rename_the_files(dir_path, file_list):
     for file in file_list:
         current_file_path = os.path.join(dir_path, file)
         
-        if os.path.isdir(current_file_path) and os.path.basename(current_file_path) != "folder_scripts":
+        if os.path.isdir(current_file_path):
             rename_the_files(current_file_path, os.listdir(current_file_path)) #recursively loop through all the folders in the current folder
             prefix_files_in_folder(current_file_path)
         
 
-main_dir = r"C:\Users\tobyt\OneDrive\ETH OneDrive_Personal\Master"
+main_dir = r"C:\Users\tobyt\OneDrive\ETH OneDrive_Personal\test"# your main directory
+main_strip = main_dir.rstrip("/\\").split(os.sep)
 file_list = os.listdir(main_dir)
 
 rename_the_files(main_dir, file_list)
