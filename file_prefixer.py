@@ -12,7 +12,7 @@ def prefix_files_in_folder(folder_path):
     for filename in os.listdir(folder_path):
         file_path = os.path.join(folder_path, filename)
         # Skip if already prefixed
-        if filename.startswith(folder_name + "_"):
+        if filename.startswith(folder_name + "_") or filename.startswith("IGN_"): #ignore tag IGN_
             continue
         #rename files
         else:
